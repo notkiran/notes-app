@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Container, Row } from "react-bootstrap";
 import "./LandingPage.css";
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
+  const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   const userInfo = localStorage.getItem("userInfo");
+  //   if (userInfo) {
+  //     navigate("/mynotes");
+  //   }
+  // }, []);
+
   return (
     <div className="main">
       <Container>
@@ -18,7 +28,7 @@ const LandingPage = () => {
                   Login
                 </Button>
               </a>
-              <a href="/signup">
+              <a href="/register">
                 <Button
                   size="lg"
                   className="landingButton"

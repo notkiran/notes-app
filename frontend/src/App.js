@@ -4,6 +4,8 @@ import Footer from "./components/Footer/Footer";
 import LandingPage from "./screens/LandingPage/LandingPage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MyNotes from "./screens/MyNotes/MyNotes";
+import LoginScreen from "./screens/LoginScreen/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen/RegisterScreen";
 
 const App = () => (
   <Router>
@@ -11,6 +13,8 @@ const App = () => (
     <main className="App">
       <Routes>
         <Route path="/" exact element={<LandingPage />} />
+        <Route path="/login" exact element={<LoginScreen />} />
+        <Route path="/register" exact element={<RegisterScreen />} />
         <Route path="/mynotes" exact element={<MyNotes />} />
       </Routes>
     </main>
