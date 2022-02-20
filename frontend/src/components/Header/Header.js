@@ -8,9 +8,19 @@ import {
   NavDropdown,
 } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../actions/userActions";
 
 const Header = () => {
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const logoutHandler = () => {
+    dispatch(logout());
+    navigate("/");
+  };
+
   return (
     <Navbar bg="primary" expand="lg" variant="dark">
       <Container>
@@ -40,12 +50,7 @@ const Header = () => {
             <NavDropdown title="Kiran G" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">My Profile</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item
-                onClick={() => {
-                  localStorage.removeItem("userInfo");
-                  navigate("/");
-                }}
-              >
+              <NavDropdown.Item onClick={logoutHandler}>
                 Logout
               </NavDropdown.Item>
             </NavDropdown>
