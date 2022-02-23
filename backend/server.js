@@ -13,10 +13,6 @@ dotenv.config();
 connectDB();
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("API is Running!");
-});
-
 app.use("/api/users", userRoutes);
 
 app.use("/api/notes", noteRoutes);

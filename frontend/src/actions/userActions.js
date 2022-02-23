@@ -9,7 +9,7 @@ import {
   USER_UPDATE_FAILURE,
   USER_UPDATE_REQUEST,
   USER_UPDATE_SUCCESS,
-} from "./../constants/userConstants";
+} from "../constants/userConstants";
 
 import axios from "axios";
 

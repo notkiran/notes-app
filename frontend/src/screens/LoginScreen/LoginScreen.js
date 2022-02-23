@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import MainScreen from "./../../components/MainScreen";
+import MainScreen from "../../components/MainScreen";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginScreen.css";
 import Loading from "../../components/Loading";
