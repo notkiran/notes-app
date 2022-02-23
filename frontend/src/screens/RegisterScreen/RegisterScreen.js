@@ -24,22 +24,6 @@ const RegisterScreen = () => {
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, userInfo } = userRegister;
 
-  useEffect(() => {
-    if (userInfo) {
-      navigate("/mynotes");
-    }
-  }, [navigate, userInfo]);
-
-  const submitHandler = async (e) => {
-    e.preventDefault();
-
-    if (password !== confirmPassword) {
-      setMessage("Passwords do not match");
-    } else {
-      dispatch(register(name, email, password, pic));
-    }
-  };
-
   const postDetails = (pics) => {
     if (!pics) {
       return setPicMessage("Please upload a profile picture");
@@ -63,6 +47,22 @@ const RegisterScreen = () => {
         .catch((err) => console.log(err));
     } else {
       setPicMessage("Please upload a valid image");
+    }
+  };
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/mynotes");
+    }
+  }, [navigate, userInfo]);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      setMessage("Passwords do not match");
+    } else {
+      dispatch(register(name, email, password, pic));
     }
   };
 

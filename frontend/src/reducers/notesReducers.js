@@ -18,7 +18,7 @@ export const noteListReducer = (state = { notes: [] }, action) => {
     case NOTES_LIST_REQUEST:
       return { loading: true };
     case NOTES_LIST_SUCCESS:
-      return { loading: false, notes: action.payload.data };
+      return { loading: false, notes: action.payload };
     case NOTES_LIST_FAILURE:
       return { loading: false, error: action.payload };
 

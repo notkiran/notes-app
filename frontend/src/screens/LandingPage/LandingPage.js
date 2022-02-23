@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Button, Container, Row } from "react-bootstrap";
 import "./LandingPage.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -23,20 +23,17 @@ const LandingPage = () => {
               <p className="subtitle">One Safe place for all your notes.</p>
             </div>
             <div className="buttonContainer">
-              <a href="/login">
-                <Button size="lg" className="landingButton">
-                  Login
-                </Button>
-              </a>
-              <a href="/register">
-                <Button
-                  size="lg"
-                  className="landingButton"
-                  variant="outline-primary"
-                >
-                  Signup
-                </Button>
-              </a>
+              <Button size="lg" className="landingButton">
+                <Link to={"/login"}>Login</Link>
+              </Button>
+
+              <Button
+                size="lg"
+                className="landingButton"
+                variant="outline-primary"
+              >
+                <Link to={"/register"}>Signup</Link>
+              </Button>
             </div>
           </div>
         </Row>

@@ -21,17 +21,12 @@ const registerUser = asyncHandler(async (req, res) => {
 
   if (user) {
     res.status(201).json({
-      status: "success",
-      data: {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        pic: user.pic,
-        isAdmin: user.isAdmin,
-        token: generateToken(user._id),
-        createdAt: user.createdAt,
-        updatedAt: user.updatedAt,
-      },
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      pic: user.pic,
+      isAdmin: user.isAdmin,
+      token: generateToken(user._id),
     });
   } else {
     res.status(400);
@@ -46,17 +41,12 @@ const authUser = asyncHandler(async (req, res) => {
 
   if (user && (await user.matchPassword(password))) {
     res.status(200).json({
-      status: "success",
-      data: {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        pic: user.pic,
-        isAdmin: user.isAdmin,
-        token: generateToken(user._id),
-        createdAt: user.createdAt,
-        updatedAt: user.updatedAt,
-      },
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      pic: user.pic,
+      isAdmin: user.isAdmin,
+      token: generateToken(user._id),
     });
   } else {
     res.status(400);

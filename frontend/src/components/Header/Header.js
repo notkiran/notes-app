@@ -53,7 +53,7 @@ const Header = ({ setSearch }) => {
                 <Link to={"/mynotes"}>My Notes</Link>
               </Nav.Link>
               <NavDropdown
-                title={userInfo?.data.name}
+                title={`${userInfo.name}`}
                 id="navbarScrollingDropdown"
               >
                 <NavDropdown.Item>

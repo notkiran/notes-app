@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { updateProfile } from "../../actions/userActions";
-import ErrorMessage from "../../components/ErrorMessage";
-import Loading from "../../components/Loading";
+import { Form, Button, Row, Col } from "react-bootstrap";
 import MainScreen from "../../components/MainScreen";
+import "./ProfileScreen.css";
+import { useDispatch, useSelector } from "react-redux";
+import { updateProfile } from "../../actions/userActions";
+import Loading from "../../components/Loading";
+import ErrorMessage from "../../components/ErrorMessage";
+import { useNavigate } from "react-router-dom";
 
 const ProfileScreen = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [pic, setPic] = useState();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [pic, setPic] = useState("");
   const [picMessage, setPicMessage] = useState();
+  const [message, setMessage] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -28,18 +30,14 @@ const ProfileScreen = () => {
     if (!userInfo) {
       navigate("/");
     } else {
-      setName(userInfo.data.name);
-      setEmail(userInfo.data.email);
-      setPic(userInfo.data.pic);
+      setName(userInfo.name);
+      setEmail(userInfo.email);
+      setPic(userInfo.pic);
     }
   }, [navigate, userInfo]);
 
   const postDetails = (pics) => {
-    if (!pics) {
-      return setPicMessage("Please upload a profile picture");
-    }
     setPicMessage(null);
-
     if (pics.type === "image/jpeg" || pics.type === "image/png") {
       const data = new FormData();
       data.append("file", pics);
@@ -51,18 +49,26 @@ const ProfileScreen = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           setPic(data.url.toString());
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
-      setPicMessage("Please upload a valid image");
+      return setPicMessage("Please Select an Image");
     }
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
+
+    if (password !== confirmPassword) {
+      setMessage("Passwords do not match");
+      setInterval(() => {
+        setMessage(null);
+      }, 5000);
+    } else {
+      setMessage(null);
       dispatch(updateProfile({ name, email, password, pic }));
     }
   };
@@ -76,29 +82,32 @@ const ProfileScreen = () => {
               {loading && <Loading />}
               {success && (
                 <ErrorMessage variant="success">
-                  Profile Updated Successfully
+                  Updated Successfully
                 </ErrorMessage>
               )}
               {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-              <Form.Group controlId="name">
+              {message && (
+                <ErrorMessage variant="danger">{message}</ErrorMessage>
+              )}
+              <Form.Group controlId="name" className="mb-2">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter name"
+                  placeholder="Enter Name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 ></Form.Control>
               </Form.Group>
-              <Form.Group controlId="email">
+              <Form.Group controlId="email" className="mb-2">
                 <Form.Label>Email Address</Form.Label>
                 <Form.Control
                   type="email"
-                  placeholder="Enter Name"
+                  placeholder="Enter Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 ></Form.Control>
               </Form.Group>
-              <Form.Group controlId="password">
+              <Form.Group controlId="password" className="mb-2">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   type="password"
@@ -107,7 +116,7 @@ const ProfileScreen = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 ></Form.Control>
               </Form.Group>
-              <Form.Group controlId="confirmPassword">
+              <Form.Group controlId="confirmPassword" className="mb-2">
                 <Form.Label>Confirm Password</Form.Label>
                 <Form.Control
                   type="password"
@@ -115,7 +124,7 @@ const ProfileScreen = () => {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 ></Form.Control>
-              </Form.Group>
+              </Form.Group>{" "}
               {picMessage && (
                 <ErrorMessage variant="danger">{picMessage}</ErrorMessage>
               )}
@@ -129,20 +138,19 @@ const ProfileScreen = () => {
                   custom
                 />
               </Form.Group>
-              <Button variant="primary" type="submit">
+              <Button type="submit" varient="primary">
                 Update
               </Button>
             </Form>
           </Col>
           <Col
-            md={6}
             style={{
               display: "flex",
-              justifyContent: "center",
               alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            <img src={userInfo.data?.pic} alt="profilePic" height="250px" />
+            <img src={pic} alt={name} className="profilePic" />
           </Col>
         </Row>
       </div>

@@ -24,7 +24,7 @@ export const listNotes = () => async (dispatch, getState) => {
 
     const config = {
       headers: {
-        Authorization: `Bearer ${userInfo.data.token}`,
+        Authorization: `Bearer ${userInfo.token}`,
       },
     };
 
@@ -52,7 +52,7 @@ export const createNoteAction =
       const config = {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${userInfo.data.token}`,
+          Authorization: `Bearer ${userInfo.token}`,
         },
       };
 
@@ -87,7 +87,7 @@ export const updateNoteAction =
       const config = {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${userInfo.data.token}`,
+          Authorization: `Bearer ${userInfo.token}`,
         },
       };
 
@@ -126,7 +126,7 @@ export const deleteNoteAction =
       const config = {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${userInfo.data.token}`,
+          Authorization: `Bearer ${userInfo.token}`,
         },
       };
 
