@@ -51,3 +51,17 @@
     height: 50px;
   }
 }
+
+@media only screen and (max-width: 430px) {
+  .title {
+    font-size: 75px;
+  }
+
+  .buttonContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+  }
+}

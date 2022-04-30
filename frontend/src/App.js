@@ -14,21 +14,27 @@ import ProfileScreen from "./screens/ProfileScreen/ProfileScreen";
 const App = () => {
   const [search, setSearch] = useState("");
   return (
-    <Router>
-      <Header setSearch={setSearch} />
-      <main className="App">
-        <Routes>
-          <Route path="/" exact element={<LandingPage />} />
-          <Route path="/login" exact element={<LoginScreen />} />
-          <Route path="/profile" exact element={<ProfileScreen />} />
-          <Route path="/register" exact element={<RegisterScreen />} />
-          <Route path="/create-note" exact element={<CreateNote />} />
-          <Route path="/note/:id" exact element={<SingleNote />} />
-          <Route path="/mynotes" exact element={<MyNotes search={search} />} />
-        </Routes>
-      </main>
-      <Footer />
-    </Router>
+    <div className="App">
+      <Router>
+        <Header setSearch={setSearch} />
+        <main>
+          <Routes>
+            <Route path="/" exact element={<LandingPage />} />
+            <Route path="/login" exact element={<LoginScreen />} />
+            <Route path="/profile" exact element={<ProfileScreen />} />
+            <Route path="/register" exact element={<RegisterScreen />} />
+            <Route path="/create-note" exact element={<CreateNote />} />
+            <Route path="/note/:id" exact element={<SingleNote />} />
+            <Route
+              path="/mynotes"
+              exact
+              element={<MyNotes search={search} />}
+            />
+          </Routes>
+        </main>
+        <Footer />
+      </Router>
+    </div>
   );
 };
 
