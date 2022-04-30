@@ -14,7 +14,9 @@ const Footer = () => {
     >
       <Container>
         <Row>
-          <Col className="text-center py-3">Copyright: &copy; Notes App</Col>
+          <Col className="text-center py-3">
+            Copyright: &copy; KRIAN G 2022 | Notes App
+          </Col>
         </Row>
       </Container>
     </footer>
